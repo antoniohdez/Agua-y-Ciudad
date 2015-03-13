@@ -22,7 +22,7 @@ import com.parse.SaveCallback;
 import java.util.Calendar;
 
 
-public class reportActivity extends ActionBarActivity {
+public class formulario_reporte extends ActionBarActivity {
 
     private DatePicker datePicker;
     private TimePicker timePicker;
@@ -36,7 +36,7 @@ public class reportActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report);
+        setContentView(R.layout.activity_formulario_reporte);
 
         Parse.enableLocalDatastore(getApplication());
         Parse.initialize(getApplication(), "D4tClbuaS3OCWzRvQjT2L3vB8KUDJesFvVNbeJke", "6xkgf0GC8KvhNXPtXrGG01vXip5EfffnDkacnZ8O");
@@ -171,5 +171,16 @@ public class reportActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void change_location(View view){
+        Intent intent = new Intent(this, MapsActivity.class);
+        // mMap.setOnMyLocationChangeListener(myLocationChangeListener);
+        //center = mMap.getCameraPosition().target;
+        //center = mMap.getCameraPosition().target;
+
+        // this.onLocationChanged(mMap.getMyLocation());
+        //intent.putExtra(EXTRA_MESSAGE, center+" ");
+        startActivity(intent);
     }
 }

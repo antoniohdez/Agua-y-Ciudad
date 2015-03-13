@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".reportActivity"
+            android:name=".formulario_reporte"
             android:label="@string/title_activity_formulario_reporte" >
         </activity>
         <activity

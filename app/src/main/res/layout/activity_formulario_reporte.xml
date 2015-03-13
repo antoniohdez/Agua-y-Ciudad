@@ -87,7 +87,8 @@
         android:id="@+id/button2"
         android:layout_below="@+id/placeText"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="change_location"/>
 
     <ImageButton
         android:layout_width="50dp"
