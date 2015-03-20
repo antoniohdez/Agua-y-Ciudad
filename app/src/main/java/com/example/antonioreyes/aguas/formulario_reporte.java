@@ -135,8 +135,6 @@ public class formulario_reporte extends ActionBarActivity {
 
     public void saveParse(View view){
 
-
-
         ParseObject reportObject = new ParseObject("ReportTest");
 
         reportObject.put("ReportDate", dateView.getText().toString());
