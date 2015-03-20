@@ -44,9 +44,9 @@
         android:layout_height="wrap_content"
         android:inputType="date"
         android:ems="10"
-        android:id="@+id/editText"
-        android:layout_alignBottom="@+id/imageButton"
-        android:layout_toLeftOf="@+id/imageButton"
+        android:id="@+id/dateTV"
+        android:layout_alignBottom="@+id/changeDateBtn"
+        android:layout_toLeftOf="@+id/changeDateBtn"
         android:layout_toRightOf="@+id/textView2"
         android:layout_toEndOf="@+id/textView2" />
 
@@ -56,37 +56,39 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Fecha"
         android:id="@+id/textView2"
-        android:layout_alignBottom="@+id/editText"
+        android:layout_alignBottom="@+id/dateTV"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <ImageButton
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/imageButton"
+        android:id="@+id/changeDateBtn"
         android:src="@drawable/cal"
         android:scaleType="fitXY"
         android:layout_below="@+id/ivicono"
-        android:layout_alignParentRight="true" />
+        android:layout_alignParentRight="true"
+        android:onClick="showDateWidget" />
 
     <ImageButton
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:id="@+id/imageButton2"
+        android:id="@+id/changeTimeBtn"
         android:src="@drawable/rel"
         android:scaleType="fitXY"
         android:layout_below="@+id/textView2"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="showTimeWidget" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="time"
         android:ems="10"
-        android:id="@+id/editText2"
-        android:layout_alignBottom="@+id/imageButton2"
-        android:layout_toLeftOf="@+id/imageButton2"
+        android:id="@+id/timeTV"
+        android:layout_alignBottom="@+id/changeTimeBtn"
+        android:layout_toLeftOf="@+id/changeTimeBtn"
         android:layout_toRightOf="@+id/textView3"
         android:layout_toEndOf="@+id/textView3" />
 
@@ -96,7 +98,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Hora"
         android:id="@+id/textView3"
-        android:layout_alignBottom="@+id/editText2"
+        android:layout_alignBottom="@+id/timeTV"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -106,7 +108,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Lugar"
         android:id="@+id/textView4"
-        android:layout_below="@+id/editText2"
+        android:layout_below="@+id/timeTV"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="30dp" />
@@ -116,7 +118,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText3"
+        android:id="@+id/placeTV"
         android:layout_below="@+id/textView4"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -127,8 +129,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cambiar Ubicación"
-        android:id="@+id/button"
-        android:layout_below="@+id/editText3"
+        android:id="@+id/changeLocationBtn"
+        android:layout_below="@+id/placeTV"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -138,7 +140,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Comentario"
         android:id="@+id/textView5"
-        android:layout_below="@+id/button"
+        android:layout_below="@+id/changeLocationBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -147,18 +149,18 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
-        android:id="@+id/editText4"
+        android:id="@+id/commentTV"
         android:layout_below="@+id/textView5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/imageButton2"
-        android:layout_alignEnd="@+id/imageButton2" />
+        android:layout_alignRight="@+id/changeTimeBtn"
+        android:layout_alignEnd="@+id/changeTimeBtn" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Agregar Foto"
-        android:id="@+id/button2"
+        android:id="@+id/addPhotoBtn"
         android:layout_below="@+id/spinner"
         android:layout_centerHorizontal="true" />
 
@@ -166,21 +168,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Enviar"
-        android:id="@+id/button3"
+        android:id="@+id/sendReportBtn"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/imageButton2"
-        android:layout_alignEnd="@+id/imageButton2" />
+        android:layout_alignRight="@+id/changeTimeBtn"
+        android:layout_alignEnd="@+id/changeTimeBtn"
+        android:onClick="saveReport" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/addPhotoBtn"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/button3" />
+        android:layout_above="@+id/sendReportBtn" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -188,7 +191,7 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="Tipo"
         android:id="@+id/textView6"
-        android:layout_below="@+id/editText4"
+        android:layout_below="@+id/commentTV"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -200,6 +203,6 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/textView6"
         android:layout_toRightOf="@+id/textView6"
-        android:layout_below="@+id/editText4" />
+        android:layout_below="@+id/commentTV" />
 
 </RelativeLayout>

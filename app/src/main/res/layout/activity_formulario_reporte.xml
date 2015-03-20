@@ -84,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Cambiar Ubicación"
-        android:id="@+id/button2"
+        android:id="@+id/addPhotoBtn"
         android:layout_below="@+id/placeText"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -118,7 +118,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Comentarios"
         android:id="@+id/textView5"
-        android:layout_below="@+id/button2"
+        android:layout_below="@+id/addPhotoBtn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
