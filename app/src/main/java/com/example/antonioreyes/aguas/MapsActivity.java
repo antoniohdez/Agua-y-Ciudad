@@ -90,7 +90,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         LatLng latLng = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(latLng));
+       // mMap.addMarker(new MarkerOptions().position(latLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         Toast.makeText(this, latLng+" ",Toast.LENGTH_LONG).show();
@@ -142,13 +142,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
 
 
     public void make_report(View view){
-        Intent intent = new Intent(this, formulario_reporte.class);
+        Intent intent = new Intent(this, MainActivity.class);
        // mMap.setOnMyLocationChangeListener(myLocationChangeListener);
-        //center = mMap.getCameraPosition().target;
+        center = mMap.getCameraPosition().target;
        center = mMap.getCameraPosition().target;
 
        // this.onLocationChanged(mMap.getMyLocation());
         intent.putExtra(EXTRA_MESSAGE, center+" ");
+
         startActivity(intent);
     }
 }

@@ -174,7 +174,7 @@ public class formulario_reporte extends ActionBarActivity {
     }
 
     public void change_location(View view){
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, MapsActivity2.class);
         // mMap.setOnMyLocationChangeListener(myLocationChangeListener);
         //center = mMap.getCameraPosition().target;
         //center = mMap.getCameraPosition().target;

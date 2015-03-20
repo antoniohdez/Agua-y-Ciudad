@@ -1,21 +1,51 @@
 package com.example.antonioreyes.aguas;
 
+import android.content.Intent;
+import android.location.Criteria;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity2 extends FragmentActivity {
+public class MapsActivity2 extends FragmentActivity implements LocationListener {
+
+    //public final static String EXTRA_MESSAGE = "com.example.antonioreyes.aguas.message";
+    public static LatLng center;
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps_activity2);
+        setContentView(R.layout.activity_maps);
+        //show error dialog if GoolglePlayServices not available
+        if (!isGooglePlayServicesAvailable()) {
+            finish();
+        }
+        SupportMapFragment supportMapFragment =
+                (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+        mMap = supportMapFragment.getMap();
+        mMap.setMyLocationEnabled(true);
+        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        Criteria criteria = new Criteria();
+        String bestProvider = locationManager.getBestProvider(criteria, true);
+        Location location = locationManager.getLastKnownLocation(bestProvider);
+        if (location != null) {
+            onLocationChanged(location);
+        }
+        locationManager.requestLocationUpdates(bestProvider, 20000, 0,this);
         setUpMapIfNeeded();
     }
 
@@ -23,6 +53,7 @@ public class MapsActivity2 extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+
     }
 
     /**
@@ -53,6 +84,45 @@ public class MapsActivity2 extends FragmentActivity {
         }
     }
 
+    @Override
+    public void onLocationChanged(Location location) {
+        //TextView locationTv = (TextView) findViewById(R.id.latlongLocation);
+        double latitude = location.getLatitude();
+        double longitude = location.getLongitude();
+        LatLng latLng = new LatLng(latitude, longitude);
+        // mMap.addMarker(new MarkerOptions().position(latLng));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+        Toast.makeText(this, latLng+" ",Toast.LENGTH_LONG).show();
+        center = latLng;
+        // locationTv.setText("Latitude:" + latitude + ", Longitude:" + longitude);
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        // TODO Auto-generated method stub
+    }
+
+    private boolean isGooglePlayServicesAvailable() {
+        int status = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (ConnectionResult.SUCCESS == status) {
+            return true;
+        } else {
+            GooglePlayServicesUtil.getErrorDialog(status, this, 0).show();
+            return false;
+        }
+    }
+
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
      * just add a marker near Africa.
@@ -60,6 +130,25 @@ public class MapsActivity2 extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        // mMap.addMarker(new MarkerOptions().position(new LatLng(20.673792, -103.3354131)).title("Soy un marcador bien chido!!"));
+        // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(20.673792, -103.3354131),12));
+
+        // mMap.setOnMyLocationChangeListener(myLocationChangeListener);
+
+        //center = mMap.getCameraPosition().target;
+
+        //Toast.makeText(this,center+" ",Toast.LENGTH_SHORT).show();
+    }
+
+
+    public void make_report(View view){
+        Intent intent = new Intent(this, formulario_reporte.class);
+        // mMap.setOnMyLocationChangeListener(myLocationChangeListener);
+        //center = mMap.getCameraPosition().target;
+        center = mMap.getCameraPosition().target;
+
+        // this.onLocationChanged(mMap.getMyLocation());
+        //intent.putExtra(EXTRA_MESSAGE, center+" ");
+        startActivity(intent);
     }
 }
