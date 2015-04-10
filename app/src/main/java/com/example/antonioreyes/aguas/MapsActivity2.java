@@ -1,5 +1,6 @@
 package com.example.antonioreyes.aguas;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
@@ -29,7 +30,7 @@ public class MapsActivity2 extends FragmentActivity implements LocationListener 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+        setContentView(R.layout.activity_maps_activity2);
         //show error dialog if GoolglePlayServices not available
         if (!isGooglePlayServicesAvailable()) {
             finish();
@@ -45,7 +46,7 @@ public class MapsActivity2 extends FragmentActivity implements LocationListener 
         if (location != null) {
             onLocationChanged(location);
         }
-        locationManager.requestLocationUpdates(bestProvider, 20000, 0,this);
+        //locationManager.requestLocationUpdates(bestProvider, 20000, 0,this);
         setUpMapIfNeeded();
     }
 
@@ -141,14 +142,17 @@ public class MapsActivity2 extends FragmentActivity implements LocationListener 
     }
 
 
-    public void make_report(View view){
-        Intent intent = new Intent(this, formulario_reporte.class);
+    public void returnToForm1(View view){
+       // Intent intent = new Intent(this, MapsActivity.class);
         // mMap.setOnMyLocationChangeListener(myLocationChangeListener);
         //center = mMap.getCameraPosition().target;
         center = mMap.getCameraPosition().target;
+        setResult(Activity.RESULT_OK, new Intent().putExtra("latitude", center.latitude).putExtra("longitude", center.longitude));
+        this.finish();
 
         // this.onLocationChanged(mMap.getMyLocation());
         //intent.putExtra(EXTRA_MESSAGE, center+" ");
-        startActivity(intent);
+        //startActivity(intent);
+       // this.finish();
     }
 }

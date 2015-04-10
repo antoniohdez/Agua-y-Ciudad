@@ -1,5 +1,6 @@
 package com.example.antonioreyes.aguas;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -19,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
@@ -39,6 +41,8 @@ public class Infraestructura extends ActionBarActivity implements AdapterView.On
     private int year, month, day, hour, minute;
 
     private ParseObject p;
+
+    private LatLng location;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,11 +200,34 @@ public class Infraestructura extends ActionBarActivity implements AdapterView.On
                 }
             }
         });
-
+        this.finish();
     }
 
     public void regresaReportes6(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        this.finish();
+    }
+
+    public void returnToMap8(View view){
+        Intent intent = new Intent(this, MapsActivity2.class);
+        //startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK){
+            double lat = data.getDoubleExtra("latitude", 1);
+            double lon = data.getDoubleExtra("longitude", 1);
+            this.location = new LatLng(lat, lon);
+            updateLocation();
+        }
+    }
+
+    public void updateLocation(){
+        EditText locationText = (EditText)findViewById(R.id.placeTV);
+        String lon = this.location.longitude+"";
+        String lat = this.location.latitude+"";
+        locationText.setText(lat+","+lon);
     }
 }

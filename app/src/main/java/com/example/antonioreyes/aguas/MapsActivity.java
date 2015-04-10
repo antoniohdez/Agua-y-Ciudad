@@ -45,7 +45,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         if (location != null) {
             onLocationChanged(location);
         }
-        locationManager.requestLocationUpdates(bestProvider, 20000, 0,this);
+        //locationManager.requestLocationUpdates(bestProvider, 10000, 0,this); //Returns marker to current position in a defined time
         setUpMapIfNeeded();
     }
 
@@ -92,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         LatLng latLng = new LatLng(latitude, longitude);
        // mMap.addMarker(new MarkerOptions().position(latLng));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(5));
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
         Toast.makeText(this, latLng+" ",Toast.LENGTH_LONG).show();
         center = latLng;
        // locationTv.setText("Latitude:" + latitude + ", Longitude:" + longitude);
@@ -145,7 +145,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener {
         Intent intent = new Intent(this, MainActivity.class);
        // mMap.setOnMyLocationChangeListener(myLocationChangeListener);
         center = mMap.getCameraPosition().target;
-       center = mMap.getCameraPosition().target;
+       //center = mMap.getCameraPosition().target;
 
        // this.onLocationChanged(mMap.getMyLocation());
         intent.putExtra(EXTRA_MESSAGE, center+" ");
